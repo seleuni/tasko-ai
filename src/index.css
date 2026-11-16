@@ -1,0 +1,34 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  --color-tasko-primary: #1EA65C;
+  --color-tasko-primary-hover: #178449;
+  --color-tasko-primary-light: #E8F7EE;
+  --color-tasko-bg: #F8F9FA;
+  --color-tasko-surface: #FFFFFF;
+  --color-tasko-border: #E9ECEF;
+  --color-tasko-text: #212529;
+  --color-tasko-secondary: #495057;
+  --color-tasko-muted: #868E96;
+  --color-tasko-destructive: #FA5252;
+  --color-tasko-destructive-light: #FFF5F5;
+  --color-tasko-destructive-border: #FFA8A8;
+  --color-tasko-yellow: #FAB005;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #1A1E29;
+}
+
+/* 스크롤바 숨김 유틸리티 */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
