@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+/* dark: 접두사를 <html class="dark"> 일 때 적용합니다 (앱 안 전환 버튼용) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 다크 모드에서 날짜 입력창·스크롤바 같은 기본 부품도 어둡게 */
+:root.dark {
+  color-scheme: dark;
+}
+
 @theme {
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
   --color-tasko-primary: #1EA65C;
