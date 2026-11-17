@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AnimatePresence, motion } from 'motion/react';
 import { useTasks } from '../context/TaskContext.jsx';
 import TaskCard from '../components/TaskCard.jsx';
 import BottomSheet from '../components/BottomSheet.jsx';
@@ -235,9 +236,20 @@ export default function AllTasksScreen() {
             <p className="text-xs text-[#868E96] mt-1">필터를 변경하거나 새 할 일을 추가해보세요</p>
           </div>
         ) : (
-          filteredTasks.map((task) => (
-            <TaskCard key={task.id} task={task} onToggle={toggleTask} />
-          ))
+          // 카드가 추가되면 아래에서 올라오며 나타나고, 빠지면 흐려지며 사라진다
+          // initial={false}: 화면을 처음 열 때는 효과 없이 바로 보여 준다
+          <AnimatePresence initial={false}>
+            {filteredTasks.map((task) => (
+              <motion.div
+                key={task.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0, transition: { duration: 0.25, ease: 'easeOut' } }}
+                exit={{ opacity: 0, transition: { duration: 0.2 } }}
+              >
+                <TaskCard task={task} onToggle={toggleTask} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         )}
       </main>
 

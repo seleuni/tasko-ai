@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'motion/react';
 import PriorityBadge from './PriorityBadge.jsx';
 
 /**
@@ -12,14 +13,31 @@ export default function TaskCard({ task, onToggle }) {
   const navigate = useNavigate();
   const isDone = task.completed;
 
+  // 방금 체크를 눌러 완료된 경우에만 '톡' 효과를 보여 준다 (화면을 처음 열 때는 효과 없음)
+  const [justChecked, setJustChecked] = useState(false);
+
   const handleCardClick = () => {
     navigate(`/tasks/${task.id}`);
   };
 
-  const handleCheckboxClick = (e) => {
+  function handleCheckboxClick(e) {
     e.stopPropagation();
+    // 미완료 -> 완료로 바뀌는 순간에만 효과를 켠다
+    if (isDone) {
+      setJustChecked(false);
+    } else {
+      setJustChecked(true);
+    }
     onToggle(task.id);
-  };
+  }
+
+  // 체크 표시 효과 설정: 0.25초 동안 작게 -> 살짝 크게 -> 원래 크기
+  let checkInitial = false;
+  if (justChecked) {
+    checkInitial = { scale: 0.6 };
+  }
+  const checkAnimate = { scale: [0.6, 1.3, 1] };
+  const checkTransition = { duration: 0.25, ease: 'easeOut' };
 
   const handleMoreClick = (e) => {
     e.stopPropagation();
@@ -50,9 +68,19 @@ export default function TaskCard({ task, onToggle }) {
         }`}
       >
         {isDone ? (
-          <svg className="w-4 h-4 stroke-[2.5]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+          <motion.svg
+            className="w-4 h-4 stroke-[2.5]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            initial={checkInitial}
+            animate={checkAnimate}
+            transition={checkTransition}
+          >
             <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
+          </motion.svg>
         ) : (
           <div className="w-2 h-2 rounded-full bg-transparent"></div>
         )}

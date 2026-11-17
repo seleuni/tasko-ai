@@ -38,7 +38,7 @@ export default function LoginScreen() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"></path>
               </svg>
             </div>
-            <span className="text-3xl font-extrabold text-[#212529] tracking-tight">Tasko</span>
+            <span className="text-3xl font-extrabold text-[#212529] tracking-tight">tasko 할일관리</span>
           </div>
           <p className="text-sm font-medium text-[#495057]">
             오늘 할 일을 이어서 관리해 보세요
