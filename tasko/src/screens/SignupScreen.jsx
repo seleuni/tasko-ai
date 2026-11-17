@@ -1,30 +1,85 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { supabase } from '../lib/supabase.js';
+
+// Supabase 에러를 한국어 안내문으로 바꿉니다.
+function toKoreanError(error) {
+  let msg = '';
+  if (error && error.message) {
+    msg = error.message;
+  }
+  if (msg.includes('already registered')) {
+    return '이미 가입된 이메일입니다.';
+  }
+  if (msg.includes('at least 6')) {
+    return '비밀번호는 6자 이상이어야 합니다.';
+  }
+  if (msg.includes('valid email') || msg.includes('invalid format')) {
+    return '올바른 이메일 주소를 입력해 주세요.';
+  }
+  if (msg.includes('rate limit') || msg.includes('too many')) {
+    return '시도가 너무 많습니다. 잠시 후 다시 시도해 주세요.';
+  }
+  if (msg.includes('Failed to fetch')) {
+    return '네트워크 연결을 확인해 주세요.';
+  }
+  return '회원가입 중 문제가 생겼습니다. 잠시 후 다시 시도해 주세요.';
+}
 
 /**
  * Tasko 모바일 회원가입 화면
- * - 버튼 클릭 시 대시보드(/dashboard)로 이동합니다.
+ * - Supabase 이메일·비밀번호로 가입합니다.
+ * - 바로 로그인되면 대시보드(/dashboard)로 이동합니다.
  */
 export default function SignupScreen() {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [error, setError] = useState('');
+  const [notice, setNotice] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // 목업 회원가입 완료: 대시보드로 이동
-    navigate('/dashboard');
-  };
+    setError('');
+    setNotice('');
+    if (password.length < 6) {
+      setError('비밀번호는 6자 이상이어야 합니다.');
+      return;
+    }
+    if (password !== passwordConfirm) {
+      setError('비밀번호와 비밀번호 확인이 서로 다릅니다.');
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const result = await supabase.auth.signUp({ email, password });
+      if (result.error) {
+        setError(toKoreanError(result.error));
+        return;
+      }
+      if (result.data.session) {
+        navigate('/dashboard');
+        return;
+      }
+      // 이메일 인증이 켜져 있으면 세션이 바로 생기지 않습니다.
+      setNotice('가입 확인 메일을 보냈습니다. 메일의 링크를 누른 뒤 로그인해 주세요.');
+    } catch (err) {
+      setError(toKoreanError(err));
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   return (
-    <div className="w-full h-full bg-[#F8F9FA] flex flex-col justify-between select-none">
+    <div className="w-full h-full bg-[#F8F9FA] dark:bg-[#121417] flex flex-col justify-between select-none">
       {/* 상단 헤더 */}
       <header className="pt-4 px-7 flex items-center justify-between z-10 shrink-0">
-        <span className="text-[13px] font-medium text-[#495057] tracking-tight">Tasko Mobile</span>
+        <span className="text-[13px] font-medium text-[#495057] dark:text-[#ADB5BD] tracking-tight">Tasko Mobile</span>
         <div className="flex items-center space-x-1.5">
           <span className="w-2 h-2 rounded-full bg-[#1EA65C] inline-block"></span>
-          <span className="text-[13px] font-medium text-[#495057]">Online</span>
+          <span className="text-[13px] font-medium text-[#495057] dark:text-[#ADB5BD]">Online</span>
         </div>
       </header>
 
@@ -38,20 +93,20 @@ export default function SignupScreen() {
                 <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round"></path>
               </svg>
             </div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-[#212529]">Tasko</h1>
+            <h1 className="text-3xl font-extrabold tracking-tight text-[#212529] dark:text-[#F1F3F5]">Tasko</h1>
           </div>
-          <p className="text-[14px] text-[#495057] font-medium tracking-tight">이메일로 간단하게 시작하세요</p>
+          <p className="text-[14px] text-[#495057] dark:text-[#ADB5BD] font-medium tracking-tight">이메일로 간단하게 시작하세요</p>
         </div>
 
         {/* 회원가입 폼 */}
         <form onSubmit={handleSubmit} className="w-full space-y-3.5">
           {/* 항목 1: 이메일 */}
           <div className="space-y-1.5">
-            <label className="block text-[13px] font-medium text-[#495057] pl-0.5" htmlFor="signupEmail">
+            <label className="block text-[13px] font-medium text-[#495057] dark:text-[#ADB5BD] pl-0.5" htmlFor="signupEmail">
               이메일
             </label>
             <input
-              className="w-full h-[50px] px-4 rounded-xl border border-[#E9ECEF] bg-white text-[14.5px] text-[#212529] placeholder-[#868E96] focus:outline-none focus:border-[#1EA65C] focus:ring-1 focus:ring-[#1EA65C] transition-colors"
+              className="w-full h-[50px] px-4 rounded-xl border border-[#E9ECEF] dark:border-[#2C3036] bg-white dark:bg-[#1E2125] text-[14.5px] text-[#212529] dark:text-[#F1F3F5] placeholder-[#868E96] focus:outline-none focus:border-[#1EA65C] focus:ring-1 focus:ring-[#1EA65C] transition-colors"
               id="signupEmail"
               placeholder="example@tasko.app"
               type="email"
@@ -63,11 +118,11 @@ export default function SignupScreen() {
 
           {/* 항목 2: 비밀번호 */}
           <div className="space-y-1.5">
-            <label className="block text-[13px] font-medium text-[#495057] pl-0.5" htmlFor="signupPassword">
+            <label className="block text-[13px] font-medium text-[#495057] dark:text-[#ADB5BD] pl-0.5" htmlFor="signupPassword">
               비밀번호
             </label>
             <input
-              className="w-full h-[50px] px-4 rounded-xl border border-[#E9ECEF] bg-white text-[14.5px] text-[#212529] placeholder-[#868E96] focus:outline-none focus:border-[#1EA65C] focus:ring-1 focus:ring-[#1EA65C] transition-colors"
+              className="w-full h-[50px] px-4 rounded-xl border border-[#E9ECEF] dark:border-[#2C3036] bg-white dark:bg-[#1E2125] text-[14.5px] text-[#212529] dark:text-[#F1F3F5] placeholder-[#868E96] focus:outline-none focus:border-[#1EA65C] focus:ring-1 focus:ring-[#1EA65C] transition-colors"
               id="signupPassword"
               placeholder="비밀번호를 입력하세요"
               type="password"
@@ -79,11 +134,11 @@ export default function SignupScreen() {
 
           {/* 항목 3: 비밀번호 확인 */}
           <div className="space-y-1.5">
-            <label className="block text-[13px] font-medium text-[#495057] pl-0.5" htmlFor="passwordConfirm">
+            <label className="block text-[13px] font-medium text-[#495057] dark:text-[#ADB5BD] pl-0.5" htmlFor="passwordConfirm">
               비밀번호 확인
             </label>
             <input
-              className="w-full h-[50px] px-4 rounded-xl border border-[#E9ECEF] bg-white text-[14.5px] text-[#212529] placeholder-[#868E96] focus:outline-none focus:border-[#1EA65C] focus:ring-1 focus:ring-[#1EA65C] transition-colors"
+              className="w-full h-[50px] px-4 rounded-xl border border-[#E9ECEF] dark:border-[#2C3036] bg-white dark:bg-[#1E2125] text-[14.5px] text-[#212529] dark:text-[#F1F3F5] placeholder-[#868E96] focus:outline-none focus:border-[#1EA65C] focus:ring-1 focus:ring-[#1EA65C] transition-colors"
               id="passwordConfirm"
               placeholder="비밀번호를 한 번 더 입력하세요"
               type="password"
@@ -94,12 +149,25 @@ export default function SignupScreen() {
           </div>
 
           {/* 회원가입 버튼 */}
+          {error && (
+            <p role="alert" className="text-xs font-medium text-[#FA5252] dark:text-[#FF6B6B]">
+              {error}
+            </p>
+          )}
+          {notice && (
+            <p role="status" className="text-xs font-medium text-[#1EA65C]">
+              {notice}
+            </p>
+          )}
+
           <div className="pt-2">
             <button
-              className="w-full h-[50px] bg-[#1EA65C] hover:bg-[#178449] active:scale-[0.99] text-white font-medium text-[15px] rounded-xl shadow-[0_4px_14px_rgba(30,166,92,0.25)] transition-all flex items-center justify-center cursor-pointer"
+              disabled={submitting}
+              className="disabled:opacity-60 w-full h-[50px] bg-[#1EA65C] hover:bg-[#178449] active:scale-[0.99] text-white font-medium text-[15px] rounded-xl shadow-[0_4px_14px_rgba(30,166,92,0.25)] transition-all flex items-center justify-center cursor-pointer"
               type="submit"
             >
-              회원가입
+              {submitting && '가입 중…'}
+              {!submitting && '회원가입'}
             </button>
           </div>
         </form>
@@ -107,7 +175,7 @@ export default function SignupScreen() {
 
       {/* 하단 로그인 전환 링크 */}
       <footer className="pb-8 flex flex-col items-center shrink-0">
-        <p className="text-[13px] text-[#495057] font-normal tracking-tight">
+        <p className="text-[13px] text-[#495057] dark:text-[#ADB5BD] font-normal tracking-tight">
           이미 계정이 있으신가요?{' '}
           <Link to="/login" className="text-[#1EA65C] font-semibold hover:underline ml-1">
             로그인

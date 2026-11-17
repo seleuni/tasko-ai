@@ -50,10 +50,10 @@ export default function TaskCard({ task, onToggle }) {
   return (
     <article
       onClick={handleCardClick}
-      className={`relative flex items-center gap-3 p-3.5 bg-white rounded-2xl border transition-all duration-200 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] ${
+      className={`relative flex items-center gap-3 p-3.5 bg-white dark:bg-[#1E2125] rounded-2xl border transition-all duration-200 cursor-pointer shadow-[0_1px_3px_rgba(0,0,0,0.04)] ${
         isDone
-          ? 'border-[#E9ECEF]/60 bg-white/80 opacity-90'
-          : 'border-[#E9ECEF] hover:border-[#1EA65C]/50'
+          ? 'border-[#E9ECEF]/60 dark:border-[#2C3036]/60 bg-white/80 dark:bg-[#1E2125]/80 opacity-90'
+          : 'border-[#E9ECEF] dark:border-[#2C3036] hover:border-[#1EA65C]/50'
       }`}
     >
       {/* 1. 좌측 원형 체크박스 (터치 영역 확보) */}
@@ -92,7 +92,7 @@ export default function TaskCard({ task, onToggle }) {
         <div className="flex items-center gap-1.5 mb-1 flex-wrap">
           <PriorityBadge priority={task.priority} />
           
-          <span className="text-[11px] font-medium text-[#495057] px-1.5 py-0.5 bg-[#F8F9FA] border border-[#E9ECEF] rounded">
+          <span className="text-[11px] font-medium text-[#495057] dark:text-[#ADB5BD] px-1.5 py-0.5 bg-[#F8F9FA] dark:bg-[#121417] border border-[#E9ECEF] dark:border-[#2C3036] rounded">
             {task.tag}
           </span>
 
@@ -110,7 +110,7 @@ export default function TaskCard({ task, onToggle }) {
         {/* 할 일 제목 (완료 시 취소선 및 연한 회색 적용) */}
         <h3
           className={`text-[14px] font-semibold tracking-tight truncate transition-colors ${
-            isDone ? 'line-through text-[#868E96]' : 'text-[#212529]'
+            isDone ? 'line-through text-[#868E96]' : 'text-[#212529] dark:text-[#F1F3F5]'
           }`}
         >
           {task.title}
@@ -122,8 +122,8 @@ export default function TaskCard({ task, onToggle }) {
             isDone
               ? 'text-[#868E96]'
               : isOverdue
-              ? 'text-[#FA5252]'
-              : 'text-[#495057]'
+              ? 'text-[#FA5252] dark:text-[#FF6B6B]'
+              : 'text-[#495057] dark:text-[#ADB5BD]'
           }`}
         >
           <svg
@@ -131,7 +131,7 @@ export default function TaskCard({ task, onToggle }) {
               isDone
                 ? 'stroke-[#868E96]'
                 : isOverdue
-                ? 'stroke-[#FA5252]'
+                ? 'stroke-[#FA5252] dark:stroke-[#FF6B6B]'
                 : 'stroke-[#868E96]'
             }`}
             fill="none"
@@ -154,7 +154,7 @@ export default function TaskCard({ task, onToggle }) {
         type="button"
         onClick={handleMoreClick}
         aria-label="상세 보기"
-        className="w-8 h-8 shrink-0 flex items-center justify-center rounded-lg text-[#868E96] hover:text-[#212529] hover:bg-[#F8F9FA] transition-colors"
+        className="w-8 h-8 shrink-0 flex items-center justify-center rounded-lg text-[#868E96] hover:text-[#212529] dark:hover:text-[#F1F3F5] hover:bg-[#F8F9FA] dark:hover:bg-[#2C3036] transition-colors"
       >
         <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
           <circle cx="12" cy="5" r="2"></circle>
