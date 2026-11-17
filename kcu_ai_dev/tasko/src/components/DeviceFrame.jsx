@@ -8,13 +8,13 @@ export default function DeviceFrame({ children, hideStatusBar = false }) {
   return (
     <div className="min-h-screen bg-[#1A1E29] flex items-center justify-center p-0 md:p-6 select-none font-sans">
       <div
-        className="w-full max-w-[393px] h-[852px] min-h-[852px] bg-[#F8F9FA] rounded-none md:rounded-[48px] relative overflow-hidden flex flex-col shadow-2xl md:border-[8px] border-[#2C3240]"
+        className="w-full max-w-[393px] h-[852px] min-h-[852px] bg-[#F8F9FA] dark:bg-[#121417] rounded-none md:rounded-[48px] relative overflow-hidden flex flex-col shadow-2xl md:border-[8px] border-[#2C3240]"
         data-purpose="iphone-16-mockup"
       >
         {/* iOS 상단 상태 표시줄 및 다이내믹 아일랜드 */}
         {!hideStatusBar && (
           <header className="w-full pt-3 px-7 flex justify-between items-center z-30 shrink-0 select-none bg-inherit">
-            <span className="text-[14px] font-semibold tracking-tight text-[#212529]">9:41</span>
+            <span className="text-[14px] font-semibold tracking-tight text-[#212529] dark:text-[#F1F3F5]">9:41</span>
             
             {/* 다이내믹 아일랜드 캡슐 */}
             <div className="w-[100px] h-[26px] bg-black rounded-full flex items-center justify-between px-2.5 pointer-events-none">
@@ -25,7 +25,7 @@ export default function DeviceFrame({ children, hideStatusBar = false }) {
             </div>
 
             {/* 통신, Wi-Fi, 배터리 아이콘 */}
-            <div className="flex items-center space-x-1.5 text-[#212529]">
+            <div className="flex items-center space-x-1.5 text-[#212529] dark:text-[#F1F3F5]">
               {/* 셀룰러 신호 아이콘 */}
               <svg className="w-4 h-3 fill-current" viewBox="0 0 18 12">
                 <rect height="4" rx="0.5" width="3" x="0" y="8" />
@@ -54,7 +54,7 @@ export default function DeviceFrame({ children, hideStatusBar = false }) {
 
         {/* iOS 하단 홈 인디케이터 바 */}
         <footer className="w-full pb-2 pt-1 flex justify-center shrink-0 z-30 select-none bg-inherit">
-          <div className="w-36 h-1 bg-[#212529] opacity-30 rounded-full"></div>
+          <div className="w-36 h-1 bg-[#212529] dark:bg-[#F1F3F5] opacity-30 rounded-full"></div>
         </footer>
       </div>
     </div>
