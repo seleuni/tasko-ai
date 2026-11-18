@@ -1,0 +1,106 @@
+<!-- 6-3.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.3 색상, 글꼴과 텍스트 유틸리티</title>
+  <link rel="stylesheet" href="dist/output.css">
+</head>
+<body class="bg-gray-100 p-6">
+  <main class="mx-auto max-w-3xl space-y-4">
+    <!-- 여기에 예제를 하나씩 추가한다 -->
+    <article class="w-80 rounded-lg bg-white p-6">
+    <p class="text-xs uppercase tracking-wide text-blue-600">tailwind css</p>
+    <h1 class="mt-1 text-2xl font-bold text-gray-900">텍스트 유틸리티</h1>
+    <p class="mt-2 text-sm font-normal leading-relaxed text-gray-600">색상, 글자 크기, 굵기, 줄 간격을 클래스 이름만으로 조절한다.</p>
+    <p class="mt-3 w-48 truncate text-sm text-gray-500">아주 긴 텍스트는 한 줄로 유지되고 넘치면 말줄임(…)으로 표시된다</p>
+    <p class="mt-3 text-sm"><del class="line-through text-gray-400">30,000원</del> <span class="font-bold text-red-600">19,000원</span></p>
+    <a href="#" class="mt-4 inline-block text-sm text-blue-600 underline underline-offset-4 decoration-2 hover:no-underline">자세히 보기</a>
+    </article>
+
+
+    <span class="">1. 아이콘과</span> <img class="" src="image.png">
+    <br/>
+    <span class="align-middle">2. 아이콘과</span> <img class="inline size-6 align-middle" src="image.png">
+
+
+    <h2>공백과 줄바꿈</h2>
+    <pre class="bg-gray-300">1.입력한 공백·줄바꿈 
+      그대로
+    유지하며 필요시 줄바꿈</pre>
+    <pre class="whitespace-pre-wrap bg-gray-300">2.입력한 공백·줄바꿈 그대로
+    유지하며 필요시 줄바꿈</pre>
+    <p class="whitespace-pre-wrap bg-gray-300">3.입력한 공백·줄바꿈 그대로
+    유지하며 필요시 줄바꿈</p>
+    <p class="bg-gray-300">4.입력한 공백·줄바꿈 그대로
+    유지하며 필요시 줄바꿈</p>
+
+
+    <br/><br/><br/><hr/>
+    <h2>들여쓰기</h2>
+    <p class="bg-gray-300">첫 줄만 들여쓰기 되는 문단이다. 문장이 길어서 두 줄 이상이 되어야 첫 줄과 둘째 줄의 시작 위치가 다른 것이 보인다.</p>
+    <p class="w-80 indent-4 bg-gray-300">첫 줄만 들여쓰기 되는 문단이다. 문장이 길어서 두 줄 이상이 되어야 첫 줄과 둘째 줄의 시작 위치가 다른 것이 보인다.</p>
+    <p class="w-80 indent-8 bg-gray-300">첫 줄만 들여쓰기 되는 문단이다. 문장이 길어서 두 줄 이상이 되어야 첫 줄과 둘째 줄의 시작 위치가 다른 것이 보인다.</p>
+
+    <br/>
+    <h2>텍스트 넘침과 말줄임 처리</h2>
+    <p class="bg-gray-300">1.아주 긴 텍스트는 한 줄로 유지되고 넘치면 말줄임(…)으로 표시된다</p>
+    <p class="w-48 bg-gray-300">2.아주 긴 텍스트는 한 줄로 유지되고 넘치면 말줄임(…)으로 표시된다</p>
+    <p class="truncate bg-gray-300">3.아주 긴 텍스트는 한 줄로 유지되고 넘치면 말줄임(…)으로 표시된다</p>
+    <p class="truncate w-48 bg-gray-300">아주 긴 텍스트는 한 줄로 유지되고 넘치면 말줄임(…)으로 표시된다</p>
+
+    <br/>
+    <h2>대문자화</h2>
+    <h2 class="uppercase">Title in lowercase</h2>
+
+
+    <h2>밑줄 두께와 간격</h2>
+    <a>밑줄 간격 조절</a>
+    <a class="underline underline-offset-4 decoration-4" href="#">밑줄 간격 조절2</a>
+    <a class="underline underline-offset-4 decoration-8" href="#">밑줄 간격 조절3</a>
+
+
+    <br/><br/><br/><hr/>
+    <p>밑줄과 취소선 등 텍스트 장식</p>
+     <a class="underline hover:no-underline" href="#">링크</a>
+     <del>취소된 가격</del>
+     <del class="line-through">취소된 가격</del>
+     
+
+     <hr/>
+     <p>텍스트 정렬</p>
+     <p class="text-center bg-gray-300">가운데 정렬</p>
+     <p class="text-left bg-gray-300" >좌측 정렬</p>
+     <p class="text-right bg-gray-300">우측 정렬</p>
+     <p class="text-left md:text-right">작은 화면은 왼쪽, md 이상은 오른쪽(6.6절 반응형과 연결)</p>
+  
+
+     <hr/>
+     <p>줄간격과 글자 간격</p>
+     <p class="bg-gray-300">줄 간격과 자간이 넓은 문단이다. 문장이 길어서 두 줄 이상으로 나뉘어야 줄 간격이 눈에 보인다.</p>
+     <p class="w-80 bg-gray-300">줄 간격과 자간이 넓은 문단이다. 문장이 길어서 두 줄 이상으로 나뉘어야 줄 간격이 눈에 보인다.</p>
+     <p class="w-80 leading-relaxed bg-gray-300">줄 간격과 자간이 넓은 문단이다. 문장이 길어서 두 줄 이상으로 나뉘어야 줄 간격이 눈에 보인다.</p>
+     <p class="w-80 leading-relaxed tracking-wide bg-gray-300">줄 간격과 자간이 넓은 문단이다. 문장이 길어서 두 줄 이상으로 나뉘어야 줄 간격이 눈에 보인다.</p>
+      
+
+     <p> 글자 크기와 폰트</p>
+     <p class="text-base font-noraml">일반</p>
+     <p class="text-2xl font-bold">제목2xl 굵게</p>
+     <p class="text-xl font-bold">제목xl 굵게</p>
+     <p class="text-sm font-normal">본문</p>
+    
+     <p>반투명 배경</p>
+     <div class="bg-blue-600/50 p-4">반투명 배경 50%</div>
+     <div class="bg-blue-600/50 p-4">반투명 배경 80%</div>
+
+     <p>본문 텍스트</p>
+     <p class="bg-blue-500 p-4 text-gray-90">본문 텍스트</p>
+
+     
+
+     
+
+  </main>
+</body>
+</html>

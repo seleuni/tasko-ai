@@ -1,0 +1,78 @@
+<!-- 6-4.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6.4 여백, 크기와 박스 스타일</title>
+  <link rel="stylesheet" href="dist/output.css">
+</head>
+<body class="bg-gray-100 p-6">
+  <main class="mx-auto max-w-3xl space-y-4">
+    <!-- 여기에 예제를 하나씩 추가한다 -->
+     <h1></h1>
+     <div class="bg-white p-4 shadow-md">shadow-md</div>
+     <div class="bg-white p-4 shadow-xl">shadow-xl</div>
+     <div class="bg-white p-4 shadow-2xl">shadow-2xl</div>
+
+     
+     <hr/><br/>
+     <input type="text" placeholder="여기를 클릭해 보세요">
+     <input type="text" class="border border-gray-300 p-2 focus:outline-2 focus:outline-red-500" placeholder="여기를 클릭해 보세요">
+     <input type="text" class="border border-gray-300 p-2 focus:outline-2 focus:outline-blue-500" placeholder="여기를 클릭해 보세요">
+
+     <br/><hr/>
+     <div class="rounded-md bg-sky-100 p-4">중간 둥글기</div>
+     <div class="size-16 rounded-full bg-sky-100"></div>
+     <div class="w-32 h-16 rounded-full bg-sky-100"></div>
+
+     <hr/><br/>
+     <div class="border border-gray-300 p-2">1px 회색 테두리</div>
+     <div class="border-2 border-blue-500 p-2">2px 파란 테두리</div>
+
+     <br/><hr/>
+     <div class="hidden md:block bg-sky-100 p-2">md(768px) 이상에서만 보인다</div>
+     <div class="flex gap-2 bg-sky-100 p-2">
+        <div class="bg-gray-300">flex</div>
+        <div class="bg-gray-300">컨테이너</div>
+        <div class="bg-gray-300">flex</div>
+        <div class="bg-gray-300">컨테이너</div>
+      </div>
+     <div class="grid gap-2 bg-sky-100 p-2">
+        <div class="bg-gray-300">grid</div>
+        <div class="bg-gray-300">컨테이너</div>
+        <div class="bg-gray-300">grid</div>
+        <div class="bg-gray-300">컨테이너</div>
+      </div>
+
+     <br/><hr/>
+     <h1>space/gap</h1>
+     <div class="flex space-x-4 bg-gray-300">
+     <div class="bg-sky-100 p-2">항목1</div>
+     <div class="bg-sky-100 p-2">항목2</div>
+     <div class="bg-sky-100 p-2">항목2</div>
+     <div class="bg-sky-100 p-2">항목2</div>
+     </div>
+     <div class="flex gap-4">
+     <div class="bg-sky-100 p-2">항목1</div>
+     <div class="bg-sky-100 p-2">항목2</div>
+     </div>
+
+     <br/><hr/>
+     <h1>최대최소</h1>
+     <div class="max-w-md mx-auto bg-sky-100">최대 너비 28rem, 가운데 배치</div>
+     <div class="min-h-40 bg-sky-200">최소 높이 10rem</div>
+
+     <br/><hr/>
+     <h1>폭과 높이</h1>
+     <div class="w-full h-16 bg-sky-100">너비 100%, 높이 4rem</div>
+     <div class="w-1/2 h-16 bg-sky-200">너비 50%</div>
+
+     <br/><hr/>
+     <h1>마진과 패딩</h1>
+     <div class="m-4 p-6 bg-gray-300">바깥 여백 1rem, 안쪽 여백 1.5rem</div>
+     <div class="mt-2 mx-auto w-64 bg-gray-300">위쪽만 0.5rem, 가로는 자동(가운데 정렬)</div>
+
+  </main>
+</body>
+</html>
