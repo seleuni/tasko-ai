@@ -10,6 +10,36 @@
 <body class="bg-gray-100 p-6">
   <main class="space-y-6">
     <!-- 여기에 예제를 하나씩 추가한다 -->
+     <!--다크모드-->
+     <div class="bg-white p-4 text-black dark:bg-gray-900 dark:text-white">
+      운영체제가 다크 모드이면 어둡게 보인다.
+     </div>
+     
+    <!--hover, focus, active 상태-->
+    <button class="rounded-md bg-blue-300 px-4 py-2 text-white hover:bg-blue-700 active:scale-65">
+    버튼
+    </button>
+
+    <!--sm, md, lg 등 화면 크기별 스타일-->
+     <p class="text-sm sm:text-base md:text-lg lg:text-xl">
+     화면이 커질수록 글자도 커진다
+      </p>
+
+     
+     <!--모바일 우선 반응형 설계-->
+     <div class="bg-green-300 grid
+     gap-4 
+     grid-cols-1
+
+     md:grid-cols-2
+     lg:grid-cols-3
+     ">
+      <div class="rounded-lg p-6 shadow bg-yellow-300">카드1</div>
+      <div class="rounded-lg p-6 shadow bg-gray-300">카드2</div>
+      <div class="rounded-lg p-6 shadow bg-purple-300">카드3</div>
+      
+     </div>
+     
   </main>
 </body>
 </html>
