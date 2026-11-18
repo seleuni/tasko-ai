@@ -8,3 +8,6 @@ build/
 *.log
 .DS_Store
 Thumbs.db
+
+# GitHub tasko-ai 저장소를 따로 받은 폴더 (별도 저장소라 여기서는 추적하지 않음)
+tasko-ai/
