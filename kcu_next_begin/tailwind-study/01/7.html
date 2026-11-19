@@ -10,6 +10,23 @@
 <body class="bg-gray-100 p-6">
   <main class="space-y-6">
     <!-- 여기에 예제를 하나씩 추가한다 -->
+    <!--필터와 backdrop-filter-->
+    <!-- hover(마우스가 올라가면):blur-none (블러 제거) -->
+    <img class="w-72 blur-sm grayscale transition
+    hover:blur-none hover:grayscale-0
+    " src="card.jpg" alt="창가에 앉아 있는 고양이">
+    
+    <div class="bg-linear-to-r from-pink-400 to-sky-400 p-8">
+      <p class="text-2xl font-bold">뒤에 있는 글자</p>
+      <div class="-mt-3 bg-white/30 p-4 backdrop-blur-md">이 상자 뒤가 흐려진다.</div>
+    </div>
+
+
+    <!--scale과 rotate-->
+     <!-- w: width(폭) scale: 범위?-->
+      <img class="mx-auto w-48 transition hover:scale-150 hover:rotate-15" src="card.jpg">
+     <img class="w-48 transition hover:scale-110" src="card.jpg">
+     <div class="m-8 size-24 rotate-15 bg-sky-200"></div>
   </main>
 </body>
 </html>
