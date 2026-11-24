@@ -48,3 +48,9 @@ export function parsePage(value: string | null | undefined): number {
   }
   return 1;
 }
+
+//폼 상태 타입 추가하기
+export interface FormState {
+  error: string;
+  values?:TaskInput;
+}

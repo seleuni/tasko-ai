@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { addComment, createTask, deleteTask, updateTask } from "@/lib/data";
 import { parseStatus } from "@/lib/types";
-import type { TaskInput } from "@/lib/types";
+import type { FormState, TaskInput } from "@/lib/types";
 
 function readText(formData: FormData, name: string): string {
   const value = formData.get(name);
@@ -28,14 +28,43 @@ function readTaskInput(formData: FormData): TaskInput {
   };
 }
 
-export async function createTaskAction(formData: FormData) {
-  const task = await createTask(readTaskInput(formData));
+
+function validateTaskInput(input: TaskInput): string {
+  if (input.title === "") {
+    return "제목을 입력하세요.";
+  }
+  if (input.title.length > 50) {
+    return "제목은 50자 이하로 입력하세요.";
+  }
+  if (input.assignee === "") {
+    return "담당자를 입력하세요.";
+  }
+  return "";
+}
+
+export async function createTaskAction(prevState: FormState, formData: FormData) {
+  const input = readTaskInput(formData);
+  const error = validateTaskInput(input);
+  if (error !== "") {
+    return { error: error, values: input };
+  }
+  const task = await createTask(input);
   revalidatePath("/tasks");
   redirect(`/tasks/${task.id}`);
 }
 
-export async function updateTaskAction(formData: FormData) {
+//  const task = await createTask(readTaskInput(formData));
+//  revalidatePath("/tasks");
+//  redirect(`/tasks/${task.id}`);
+//}
+
+export async function updateTaskAction(prevState: FormState, formData: FormData): Promise<FormState> {
   const id = Number(readText(formData, "id"));
+  const input = readTaskInput(formData);
+  const error = validateTaskInput(input);
+  if (error !== "") {
+    return { error: error, values: input };
+  }
   await updateTask(id, readTaskInput(formData));
   revalidatePath("/tasks");
   revalidatePath(`/tasks/${id}`);
