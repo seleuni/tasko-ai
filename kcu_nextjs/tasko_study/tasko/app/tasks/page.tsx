@@ -25,7 +25,7 @@ export default async function TasksPage({ searchParams }: TasksPageProps) {
       {/* [수정 시작] 이전: <h1 className="mb-6 text-2xl font-bold">할 일 목록</h1> */}
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-2xl font-bold">할 일 목록</h1>
-        <Link href="/tasks/new" className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700">
+        <Link href="/new" className="rounded-md bg-blue-600 px-4 py-2 text-sm text-white hover:bg-blue-700">
           새 할 일
         </Link>
       </div>
